@@ -6,7 +6,15 @@
   "repository": "https://github.com/xiajing7478/webpack.git",
   "author": "Xia Jing <xiaj@gjmetal.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "dev": "webpack --config webpack.config.js"
+  },
   "devDependencies": {
+    "clean-webpack-plugin": "^2.0.2",
+    "css-loader": "^2.1.1",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^0.23.1",
     "webpack": "^4.32.2",
     "webpack-cli": "^3.3.2"
   }
