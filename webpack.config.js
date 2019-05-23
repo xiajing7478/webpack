@@ -7,6 +7,8 @@ const getPath = (dir) => path.resolve(__dirname, dir)
 const CleanWebpackPlugin = require('clean-webpack-plugin') // 清除目录
 const HtmlWebpackPlugin = require('html-webpack-plugin') // html模板
 const CssExtractPlugin = require('mini-css-extract-plugin') // css提取
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const TerserWebpackPlugin = require('terser-webpack-plugin')
 module.exports = {
   mode: 'production', // 2种, development 和 production
   entry: getPath('src/index.js'), // 入口文件
@@ -16,15 +18,15 @@ module.exports = {
   },
   module: { // 模块
     rules: [ // 规则
-      { test: /\.css$/, use: [CssExtractPlugin.loader, 'css-loader']},
+      { test: /\.css$/, use: [CssExtractPlugin.loader, 'css-loader', 'postcss-loader']},
       { test: /\.less/,
         use: [
-          CssExtractPlugin.loader, 'css-loader', 'less-loader'
+          CssExtractPlugin.loader, 'css-loader', 'less-loader', 'postcss-loader'
         ]
       },
       { test: /\.scss/,
         use: [
-          CssExtractPlugin.loader, 'css-loader', 'sass-loader'
+          CssExtractPlugin.loader, 'css-loader', 'sass-loader', 'postcss-loader'
         ]
       }
     ]
@@ -34,6 +36,7 @@ module.exports = {
     new CssExtractPlugin({
       filename: 'main.[hash:8].css'
     }),
+    new OptimizeCSSAssetsPlugin(),
     new HtmlWebpackPlugin({
       template: getPath('index.html'),
       filename: 'index.html'
