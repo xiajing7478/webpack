@@ -9,6 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin') // html模板
 const CssExtractPlugin = require('mini-css-extract-plugin') // css提取
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+// const HtmlWithImgLoader = require('html-withimg-loader')
 // const TerserWebpackPlugin = require('terser-webpack-plugin')
 module.exports = {
   mode: 'production', // 2种, development 和 production
@@ -29,6 +30,20 @@ module.exports = {
         use: [
           CssExtractPlugin.loader, 'css-loader', 'sass-loader', 'postcss-loader'
         ]
+      },
+      {
+        test: /\.(jpg|jpeg|png)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 1 * 1024,
+            name: '[name].[ext]'
+          }
+        }
+      },
+      {
+        test: /\.html$/,
+        use: 'html-withimg-loader'
       }
     ]
   },

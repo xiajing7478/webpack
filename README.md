@@ -11,5 +11,7 @@ webpack learn
    optimize-css-assets-webpack-plugin
    terser-webpack-plugin
 5. CleanWebpackPlugin CopyWebpackPlugin
+6. url-loader file-loader html-withimg-loader 处理图片
+   html-withimg-loader 主要是处理<img src='../src/logo.png'/>
 
 
