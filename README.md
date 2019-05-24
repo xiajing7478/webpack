@@ -10,4 +10,6 @@ webpack learn
 4. css, js压缩
    optimize-css-assets-webpack-plugin
    terser-webpack-plugin
+5. CleanWebpackPlugin CopyWebpackPlugin
+
 

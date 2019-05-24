@@ -8,7 +8,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin') // 清除目录
 const HtmlWebpackPlugin = require('html-webpack-plugin') // html模板
 const CssExtractPlugin = require('mini-css-extract-plugin') // css提取
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const TerserWebpackPlugin = require('terser-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+// const TerserWebpackPlugin = require('terser-webpack-plugin')
 module.exports = {
   mode: 'production', // 2种, development 和 production
   entry: getPath('src/index.js'), // 入口文件
@@ -31,12 +32,24 @@ module.exports = {
       }
     ]
   },
+  // optimization: { // 优化
+  //   minimizer: [
+  //     new OptimizeCSSAssetsPlugin({})
+  //   ]
+  // },
   plugins: [
     new CleanWebpackPlugin(),
     new CssExtractPlugin({
       filename: 'main.[hash:8].css'
     }),
     new OptimizeCSSAssetsPlugin(),
+    new CopyWebpackPlugin([
+      {
+        from : getPath('static'),
+        to: './static',
+        ingore: ['.*']
+      }
+    ]),
     new HtmlWebpackPlugin({
       template: getPath('index.html'),
       filename: 'index.html'
