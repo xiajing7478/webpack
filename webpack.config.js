@@ -3,6 +3,7 @@
  * @date 2019/5/23 17:22
  */
 const path = require('path')
+const webpack = require('webpack')
 const getPath = (dir) => path.resolve(__dirname, dir)
 const CleanWebpackPlugin = require('clean-webpack-plugin') // 清除目录
 const HtmlWebpackPlugin = require('html-webpack-plugin') // html模板
@@ -12,11 +13,26 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 // const HtmlWithImgLoader = require('html-withimg-loader')
 // const TerserWebpackPlugin = require('terser-webpack-plugin')
 module.exports = {
-  mode: 'production', // 2种, development 和 production
+  mode: 'development', // 2种, development 和 production
   entry: getPath('src/index.js'), // 入口文件
   output: {  // 打包的输出文件
     filename: 'bundle.[hash:8].js',
     path: getPath('dist')
+  },
+  devServer: {
+    contentBase: getPath('dist'), // 指定了服务器资源的根目录,如果不写入contentBase的值，那么contentBase默认是项目的目录
+    port: 8888,
+    // hot: true,
+    // progress: true,
+    // compress: true, // 设置为true的时候对所有的服务器资源采用gzip压缩
+    historyApiFallback: true, //用来应对返回404页面时定向到特定页面用
+    // inline: true,
+    overlay: true // 编译出错的时候，在浏览器页面上显示错误
+    // historyApiFallback:{
+    //   rewrites:[
+    //     {from: /.*/g, to:'/404.html'}
+    //   ]
+    // }
   },
   module: { // 模块
     rules: [ // 规则
@@ -74,5 +90,6 @@ module.exports = {
       //   collapseWhitespace: true // 是否去掉空行
       // }
     })
+    // new webpack.HotModuleReplacementPlugin()
   ]
 }

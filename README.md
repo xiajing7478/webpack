@@ -13,5 +13,6 @@ webpack learn
 5. CleanWebpackPlugin CopyWebpackPlugin
 6. url-loader file-loader html-withimg-loader 处理图片
    html-withimg-loader 主要是处理<img src='../src/logo.png'/>
+7. webpack-dev-server
 
 

@@ -5,4 +5,11 @@
 require('./css/index.css')
 require('./less/index.less')
 require('./sass/index.scss')
-console.log('webpack....')
+// const a
+console.log('webpack........................')
+
+let fn = () => {
+  console.log('fn........')
+}
+
+fn()
