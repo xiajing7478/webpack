@@ -21,7 +21,7 @@ webpack learn
    @babel/plugin-transform-runtime
    @babel/polyfill
    @babel/runtime
-9
+9  eslint-loader .eslintrc.json
 
 
 
