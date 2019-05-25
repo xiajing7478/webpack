@@ -23,6 +23,12 @@ webpack learn
    @babel/runtime
 9  eslint eslint-loader .eslintrc.json
 
+10 解析第三方包
+   expose-loader -> 暴露方法到window
+   reslove -> 解析第三方包
+   ProvidePlugin -> 内置插件，在每个模块中都会被注入
+   cdn,externals
+
 
 
 

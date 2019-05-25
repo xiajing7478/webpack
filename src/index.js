@@ -9,8 +9,14 @@ import './classA.js'
 import './classB.js'
 import './includeDemo.js'
 import './decoratorDemo.js'
+import '@/alias/alias'
 // const a
 console.log('webpack........................')
+
+import $ from 'jquery'
+// import bootstrap from 'bootstrap'
+console.log($)
+// console.log(window.$) // undefined
 
 let fn = () => {
   console.log('fn........')

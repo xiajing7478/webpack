@@ -13,11 +13,15 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 // const HtmlWithImgLoader = require('html-withimg-loader')
 // const TerserWebpackPlugin = require('terser-webpack-plugin')
 module.exports = {
-  mode: 'development', // 2种, development 和 production
+  mode: 'production', // 2种, development 和 production
   entry: [getPath('src/index.js'),], // 入口文件
   output: {  // 打包的输出文件
     filename: 'bundle.[hash:8].js',
     path: getPath('dist')
+    // publicPath: 'http://www.baidu.com/'
+  },
+  externals: { // 表明是外部的，不需要打包
+    jquery: '$'
   },
   devServer: {
     contentBase: getPath('dist'), // 指定了服务器资源的根目录,如果不写入contentBase的值，那么contentBase默认是项目的目录
@@ -34,17 +38,23 @@ module.exports = {
     //   ]
     // }
   },
+  resolve: { // 解析第三方包
+    // extensions: ['js', '.vue', '.css', '.json'],
+    alias: { // 别名
+      '@': getPath('src')
+    }
+  },
   module: { // 模块
     rules: [ // 规则
-      { test: /\.js$/,
-        use: {
-          loader: "eslint-loader",
-          options: {
-            enforce: 'pre'
-          },
-        },
-        exclude: /node_modules/
-      },
+      // { test: /\.js$/,
+      //   use: {
+      //     loader: "eslint-loader",
+      //     options: {
+      //       enforce: 'pre'
+      //     },
+      //   },
+      //   exclude: /node_modules/
+      // },
       { test: /\.js$/, use: 'babel-loader', include: getPath('src'), exclude: /node_modules/},
       { test: /\.css$/, use: [CssExtractPlugin.loader, 'css-loader', 'postcss-loader']},
       { test: /\.less/,
@@ -71,6 +81,10 @@ module.exports = {
         test: /\.html$/,
         use: 'html-withimg-loader'
       }
+      // { // 暴露方法
+      //   test: require.resolve('jquery'),
+      //   use: 'expose-loader?$'
+      // }
     ]
   },
   // optimization: { // 优化
@@ -100,6 +114,9 @@ module.exports = {
       //   collapseWhitespace: true // 是否去掉空行
       // }
     })
+    // new webpack.ProvidePlugin ({ // 内置插件，在每个模块中都注入$
+    //   $: 'jquery' // jquery 是对应模块，从nodde_module查找
+    // })
     // new webpack.HotModuleReplacementPlugin()
   ]
 }
