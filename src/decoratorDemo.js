@@ -10,6 +10,9 @@ class C {
   }
 }
 
+let c = new C()
+console.log(c.c)
+
 function log(target) {
   const _target = new target()
   _target.fn()

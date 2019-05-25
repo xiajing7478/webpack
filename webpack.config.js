@@ -14,7 +14,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 // const TerserWebpackPlugin = require('terser-webpack-plugin')
 module.exports = {
   mode: 'development', // 2种, development 和 production
-  entry: ['@babel/polyfill', getPath('src/index.js'),], // 入口文件
+  entry: [getPath('src/index.js'),], // 入口文件
   output: {  // 打包的输出文件
     filename: 'bundle.[hash:8].js',
     path: getPath('dist')
@@ -36,6 +36,15 @@ module.exports = {
   },
   module: { // 模块
     rules: [ // 规则
+      { test: /\.js$/,
+        use: {
+          loader: "eslint-loader",
+          options: {
+            enforce: 'pre'
+          },
+        },
+        exclude: /node_modules/
+      },
       { test: /\.js$/, use: 'babel-loader', include: getPath('src'), exclude: /node_modules/},
       { test: /\.css$/, use: [CssExtractPlugin.loader, 'css-loader', 'postcss-loader']},
       { test: /\.less/,
