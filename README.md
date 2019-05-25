@@ -14,5 +14,16 @@ webpack learn
 6. url-loader file-loader html-withimg-loader 处理图片
    html-withimg-loader 主要是处理<img src='../src/logo.png'/>
 7. webpack-dev-server
+8. es6 -> es5
+   @babel-core babel-loader @babel/preset-env .babel.rc
+   @babel/plugin-proposal-class-properties
+   @babel/plugin-proposal-decorators
+   @babel/plugin-transform-runtime
+   @babel/polyfill
+   @babel/runtime
+9
+
+
+
 
 

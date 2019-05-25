@@ -5,6 +5,10 @@
 require('./css/index.css')
 require('./less/index.less')
 require('./sass/index.scss')
+import './classA.js'
+import './classB.js'
+import './includeDemo.js'
+import './decoratorDemo.js'
 // const a
 console.log('webpack........................')
 
