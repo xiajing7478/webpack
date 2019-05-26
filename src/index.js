@@ -10,7 +10,7 @@ import './classB.js'
 import './includeDemo.js'
 import './decoratorDemo.js'
 import '@/alias/alias'
-// const a
+import './env.js'
 console.log('webpack........................')
 
 import $ from 'jquery'

@@ -12,8 +12,11 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 // const HtmlWithImgLoader = require('html-withimg-loader')
 // const TerserWebpackPlugin = require('terser-webpack-plugin')
+const env = process.env.NODE_ENV
+console.log('当前的NODE_ENV', process.env.NODE_ENV)
 module.exports = {
-  mode: 'production', // 2种, development 和 production
+  // mode: 'production', // 2种, development 和 production
+  mode: env === 'production' ? 'production': 'development',
   entry: [getPath('src/index.js'),], // 入口文件
   output: {  // 打包的输出文件
     filename: 'bundle.[hash:8].js',
@@ -23,6 +26,7 @@ module.exports = {
   externals: { // 表明是外部的，不需要打包
     jquery: '$'
   },
+  devtool: "source-map",
   devServer: {
     contentBase: getPath('dist'), // 指定了服务器资源的根目录,如果不写入contentBase的值，那么contentBase默认是项目的目录
     port: 8888,
@@ -39,7 +43,7 @@ module.exports = {
     // }
   },
   resolve: { // 解析第三方包
-    // extensions: ['js', '.vue', '.css', '.json'],
+    extensions: ['.js', '.css', '.json'],
     alias: { // 别名
       '@': getPath('src')
     }
@@ -113,10 +117,13 @@ module.exports = {
       //   removeAttributeQuotes: true, // 是否去除引号
       //   collapseWhitespace: true // 是否去掉空行
       // }
-    })
+    }),
     // new webpack.ProvidePlugin ({ // 内置插件，在每个模块中都注入$
     //   $: 'jquery' // jquery 是对应模块，从nodde_module查找
     // })
-    // new webpack.HotModuleReplacementPlugin()
+    // new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      DEV: "'production'"
+    })
   ]
 }
